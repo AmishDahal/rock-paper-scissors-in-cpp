@@ -1,0 +1,93 @@
+#include <iostream>
+#include <string>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+
+int main() {
+    string input;
+    srand(time(NULL)); // Seed the random number generator
+
+    // Main game loop
+    while (true) {
+        // Clear the terminal screen
+        system("clear");
+
+        // Get user input
+        cout << "Choose rock, paper, or scissors: ";
+        getline(cin, input);
+
+        // Convert user input to lowercase
+        for (int i = 0; i < input.length(); i++) {
+            input[i] = tolower(input[i]);
+        }
+
+        // Generate computer's choice
+        int comp_choice = rand() % 3;
+        string comp_input;
+
+        switch (comp_choice) {
+            case 0:
+                comp_input = "rock";
+                break;
+            case 1:
+                comp_input = "paper";
+                break;
+            case 2:
+                comp_input = "scissors";
+                break;
+        }
+
+        // Determine the winner
+        string result;
+        if (input == "rock") {
+            if (comp_input == "rock") {
+                result = "tie";
+            } else if (comp_input == "paper") {
+                result = "computer";
+            } else {
+                result = "user";
+            }
+        } else if (input == "paper") {
+            if (comp_input == "rock") {
+                result = "user";
+            } else if (comp_input == "paper") {
+                result = "tie";
+            } else {
+                result = "computer";
+            }
+        } else if (input == "scissors") {
+            if (comp_input == "rock") {
+                result = "computer";
+            } else if (comp_input == "paper") {
+                result = "user";
+            } else {
+                result = "tie";
+            }
+        } else {
+            result = "invalid";
+        }
+
+        // Output the result
+        cout << "You chose " << input << endl;
+        cout << "The computer chose " << comp_input << endl;
+        if (result == "user") {
+            cout << "You win!" << endl;
+        } else if (result == "computer") {
+            cout << "The computer wins." << endl;
+        } else if (result == "tie") {
+            cout << "It's a tie." << endl;
+        } else {
+            cout << "Invalid input. Please try again." << endl;
+        }
+
+        // Wait for user input
+        cout << "Press enter to play again, or type 'quit' to exit: ";
+        getline(cin, input);
+        if (input == "quit") {
+            break;
+        }
+    }
+
+    return 0;
+}
